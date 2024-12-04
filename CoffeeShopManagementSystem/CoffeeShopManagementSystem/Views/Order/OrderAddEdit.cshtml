@@ -1,0 +1,123 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CoffeeShopManagementSystem.Models.OrderModel;
+<div class="main" id="main">
+    <div class="container">
+
+        <section class="section">
+            <div class="row">
+                <div class="col">
+
+                    <div class="card">
+                        @if (@TempData["OrderInsert"] != null)
+                        {
+                            <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                                <h5 class="text-success text-center ">@TempData["OrderInsert"]</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">Order</h5>
+
+                            <!-- General Form Elements -->
+                            <form asp-controller="Order" asp-action="OrderSave" method="post">
+                                <div class="row mb-3">
+                                    <label asp-for="OrderDate" class="col-sm-2 col-form-label">Order Date</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" asp-for="OrderDate" class="form-control">
+                                        <span asp-validation-for="OrderDate" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" asp-for="CustomerID">Customer Name</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" asp-for="CustomerID" asp-items="@(new SelectList(ViewBag.CustomerList, "id", "value"))" aria-label="Default select example">
+                                            <option value="">Select Customer</option>
+                                            
+                                            
+                                        </select>
+                                        <span asp-validation-for="CustomerID" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" asp-for="PaymentMode">Payment Mode</label>
+                                    <div class="col-sm-10">
+                                        <select asp-for="PaymentMode" class="form-select" aria-label="Default select example">
+                                            <option >Open this select menu</option>
+                                            <option value="Online">Online</option>
+                                            <option value="Cash">Cash</option>
+                                        </select>
+                                        <span asp-validation-for="PaymentMode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <label asp-for="TotalAmount" class="col-sm-2 col-form-label">Total Amount</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" asp-for="TotalAmount" class="form-control">
+                                        <span asp-validation-for="TotalAmount" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label asp-for="ShippingAddress" class="col-sm-2 col-form-label">Shipping Address</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" asp-for="ShippingAddress" style="height: 100px"></textarea>
+                                        <span asp-validation-for="ShippingAddress" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label" asp-for="UserID"> User Id</label>
+
+                                    <div class="col-sm-10">
+                                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "id", "value"))">
+                                            <option value="">Select User</option>
+                                        </select>
+                                        <span asp-validation-for="UserID" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+
+                                <div class="row mt-5">
+                                    <div class="col-12 text-center">
+                                        <a asp-controller="Order" asp-action="OrderSave">
+                                            <input type="hidden" name="OrderID" value="@Model.OrderID" />
+
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </a>
+
+                                        <button type="reset" class="btn btn-secondary">Reset</button>
+
+                                        <a asp-controller="Order" asp-action="OrderList">
+                                            <button type="button" class="btn btn-success">Back</button>
+
+                                        </a>
+
+                                    </div>
+                                </div>
+                                
+
+                            </form><!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

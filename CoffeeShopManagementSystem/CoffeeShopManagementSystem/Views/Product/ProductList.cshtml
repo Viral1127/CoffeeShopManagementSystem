@@ -1,0 +1,105 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataTable;
+@using System.Data;
+<main class="main" id="main">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="pagetitle">
+                <h1>Product</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">AllProduct</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        
+        <div class="col-lg-6">
+            <a asp-controller="Product" asp-action="ProductAddEdit">
+                <button class="btn btn-primary mb-3 float-end">Add</button>
+            </a>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+             <div class="d-flex flex-row-reverse align-items-center">
+                @if (@TempData["ProductInsert"] != null)
+                {
+                    <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                        <h5 class="text-success text-center ">@TempData["ProductInsert"]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                    </div>
+                }
+            </div>
+            @if (@TempData["ErrorMessage"] != null)
+            {
+                <div class="alert mt-3 alert-danger alert-dismissible fade show " role="alert">
+                    <h5 class="text-danger text-center">@TempData["ErrorMessage"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                </div>
+
+            }
+            <h5 class="card-title">Product Table</h5>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Product Price</th>
+                        <th scope="col">Product Code</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow dataRow in Model.Rows)
+                    {
+                        <tr>
+                           
+                            <td>@dataRow["ProductName"]</td>
+                            <td>@dataRow["ProductCode"]</td>
+                            <td>@dataRow["ProductPrice"]</td>
+                            <td>@dataRow["Description"]</td>
+                            <td>@dataRow["UserName"]</td>
+                            <td>
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a class="btn btn-success btn-xs" asp-controller="Product" asp-action="ProductAddEdit" asp-route-ProductID="@dataRow["ProductID"]">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-4">
+                                        <form method="post" asp-controller="Product" asp-action="ProductDelete">
+                                            <input type="hidden" name="ProductID" value="@dataRow["ProductID"]" />
+                                            <button type="button" class="btn btn-danger btn-xs" onclick="confirmDelete('/Product/ProductDelete?ProductID=@dataRow["ProductID"]')">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+                         
+        </div>
+    </div>
+</main>
+

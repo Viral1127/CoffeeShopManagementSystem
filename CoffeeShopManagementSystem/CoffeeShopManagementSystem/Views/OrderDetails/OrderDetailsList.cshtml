@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataTable;
+@using System.Data;
+<main class="main" id="main">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="pagetitle">
+                <h1>OrderDetails</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">AllOrderDetails</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <a asp-controller="OrderDetails" asp-action="OrderDetailsAddEdit">
+                <button class="btn btn-primary mb-3 float-end">Add</button>
+
+            </a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex flex-row-reverse align-items-center">
+                @if (@TempData["OrderDetailInsert"] != null)
+                {
+                    <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                        <h5 class="text-success text-center ">@TempData["OrderDetailInsert"]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                    </div>
+                }
+            </div>
+            @if (@TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <h5 class="text-danger">@TempData["ErrorMessage"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                </div>
+
+            }
+            <h5 class="card-title">OrderDetails Table</h5>
+
+            <!-- Default Table -->
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Product Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow detail in Model.Rows)
+                    {
+                        <tr>
+                            
+                            <td>@detail["OrderDate"]</td>
+                            <td>@detail["ProductName"]</td>
+                            <td>@detail["Quantity"]</td>
+                            <td>@detail["Amount"]</td>
+                            <td>@detail["TotalAmount"]</td>
+                            <td>@detail["userName"]</td>
+                            <td class="row">
+                                <div class="col-4">
+                                    <a asp-controller="OrderDetails" asp-action="OrderDetailsAddEdit" asp-route-OrderDetailID="@detail["OrderDetailID"]" class="btn btn-success me-3">
+                                        <i class="bi bi-pencil-fill"></i>
+                                    </a>
+
+                                        
+                                </div>
+                                <div class="col-8">
+                                    <form asp-controller="OrderDetails" asp-action="OrderDetailsDelete" method="post">
+                                        <input type="hidden" name="OrderDetailID" value="@Convert.ToInt32(detail["OrderDetailID"])" />
+                                        <button type="button" class="btn btn-danger" onclick="confirmDelete('/OrderDetails/OrderDetailsDelete?OrderDetailID=@detail["OrderDetailID"]')"><i class="bi bi-trash"></i></button>
+                                    </form>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
+    </div>
+</main>

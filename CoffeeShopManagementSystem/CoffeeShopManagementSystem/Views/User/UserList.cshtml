@@ -1,0 +1,119 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataTable;
+@using System.Data;
+<main class="main" id="main">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="pagetitle">
+                <h1>User</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">AllUser</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-6 ">
+            <div class="row text-end">
+                <div class="col-8">
+                    <a asp-controller="User" asp-action="UserAddEdit">
+                        <button class="btn btn-primary mb-3 float-end">Add</button>
+
+                    </a>
+                </div>
+                &nbsp;
+                <div class="col">
+                    <a asp-controller="User" asp-action="ExportToExcel">
+                        <button class="btn btn-primary"> Export To Excel </button>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+        
+
+
+    </div>
+    <div class="card">
+        <div class="d-flex flex-row-reverse align-items-center">
+            @if (@TempData["UserInsert"] != null)
+            {
+                <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                    <h5 class="text-success text-center ">@TempData["UserInsert"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                </div>
+            }
+        </div>
+        <div class="card-body">
+           
+            @if (@TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible mt-3 fade show " role="alert">
+                    <h5 class="text-danger ">@TempData["ErrorMessage"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                </div>
+            }
+
+            <h5 class="card-title">User Table</h5>
+
+            <!-- Default Table -->
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Mobile No</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">IsActive</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (DataRow dataRow in Model.Rows)
+                    {
+                        <tr>
+                           
+                            <td>@dataRow["UserName"]</td>
+                            <td>@dataRow["Email"]</td>
+                            <td>@dataRow["Password"]</td>
+                            <td>@dataRow["MobileNo"]</td>
+                            <td>@dataRow["Address"]</td>
+                            <td>@dataRow["IsActive"]</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <a class="btn btn-success btn-xs me-3" asp-controller="User" asp-action="UserAddEdit" asp-route-UserID="@dataRow["UserID"]">
+                                            <i class="bi bi-pencil-fill"></i>
+                                        </a>
+
+                                    </div>
+                                    <div class="col-5">
+                                        <form id="delete-form-@dataRow["UserID"]" asp-controller="User" asp-action="UserDelete" method="post">
+                                            <input type="hidden" name="UserID" value="@Convert.ToInt32(dataRow["UserID"])" />
+                                            <button class="btn btn-danger" type="button" onclick="confirmDelete('/User/UserDelete?UserID=@dataRow["UserID"]')"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
+    </div>
+</main>
+
+
+

@@ -1,0 +1,131 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CoffeeShopManagementSystem.Models.ProductModel;
+<main id="main" class="main">
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    
+                    @if (@TempData["ProductInsert"] != null)
+                    {
+                        <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                            <h5 class="text-success text-center ">@TempData["ProductInsert"]</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                        </div>
+                    }
+                    <div class="card-body">
+                        <h1 class="card-title text-center">Product Form</h1>
+
+                        <!-- General Form Elements -->
+                        <form id="productForm" asp-controller="Product" asp-action="ProductSave" method="post">
+
+                            <div class="row mb-3">
+                                <label asp-for="ProductName" class="col-sm-2 col-form-label">ProductName</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="ProductName" class="form-control">
+                                    <span asp-validation-for="ProductName" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="ProductPrice" class="col-sm-2 col-form-label">Product Price</label>
+                                <div class="col-sm-10">
+                                    <input type="number" asp-for="ProductPrice" class="form-control">
+                                    <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label asp-for="ProductCode" class="col-sm-2 col-form-label">Product Code</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="ProductCode" class="form-control">
+                                    <span asp-validation-for="ProductCode" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label asp-for="Description" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <input type="text" asp-for="Description" class="form-control">
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputNumber" asp-for="UserID" class="col-sm-2 col-form-label">UserID</label>
+                                <div class="col-sm-10">
+
+                                    <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "id", "value"))">
+                                        <option value="">Select User</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            
+                            <div class="row mt-5">
+                                <div class="col-12 text-center">
+                                    <a asp-controller="Product" asp-action="ProductSave">
+                                        <input type="hidden" name="ProductID" value="@Model.ProductID" />
+                                        
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </a>
+
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+
+                                    <a asp-controller="Product" asp-action="ProductList">
+                                        <button type="button" class="btn btn-success">Back</button>
+
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </form><!-- End General Form Elements -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<script>
+    // Function to hide alert and reset form
+    function hideAlertAndResetForm(alertId, formId, duration) {
+        setTimeout(function () {
+            var alertElement = document.getElementById(alertId);
+            var formElement = document.getElementById(formId);
+
+            if (alertElement) {
+                alertElement.classList.remove('show');
+                alertElement.classList.remove('mt-3');// Hide the alert using Bootstrap's 'show' class
+            }
+
+            if (formElement) {
+                formElement.reset(); // Reset the form fields
+            }
+        }, duration);
+    }
+
+    // Call the function to hide alert and reset form after 3 seconds if the alert exists
+    document.addEventListener('DOMContentLoaded', function () {
+        if (document.getElementById('productInsertAlert')) {
+            hideAlertAndResetForm('productInsertAlert', 'productForm', 1000);
+        }
+    });
+</script>

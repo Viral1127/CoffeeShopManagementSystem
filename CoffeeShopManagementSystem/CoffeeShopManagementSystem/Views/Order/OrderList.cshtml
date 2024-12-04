@@ -1,0 +1,102 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DataTable;
+@using System.Data;
+
+
+<main class="main" id="main">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="pagetitle">
+                <h1>Order</h1>
+                <nav>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="breadcrumb-item active">AllOrders</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <a asp-controller="Order" asp-action="OrderAddEdit">
+                <button class="btn btn-primary mb-3 float-end">Add</button>
+
+            </a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex flex-row-reverse align-items-center">
+                @if (@TempData["OrderInsert"] != null)
+                {
+                    <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                        <h5 class="text-success text-center ">@TempData["OrderInsert"]</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                    </div>
+                }
+            </div>
+            @if (@TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show " role="alert">
+                    <h5 class="text-danger">@TempData["ErrorMessage"]</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                </div>
+
+            }
+            <h5 class="card-title">Order Table</h5>
+
+            <!-- Default Table -->
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Order Date</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Payment Mode</th>
+                        <th scope="col">Total Amount</th>
+                        <th scope="col">Shipping Address</th>
+                        <th scope="col">User Name</th>
+                        <th scope="col">Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (DataRow order in Model.Rows)
+                    {
+                        <tr>
+                            
+                            <td>@order["OrderDate"]</td>
+                            <td>@order["CustomerName"]</td>
+                            <td>@order["PaymentMode"]</td>
+                            <td>@order["TotalAmount"]</td>
+                            <td>@order["ShippingAddress"]</td>
+                            <td>@order["UserName"]</td>
+                            <td>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a asp-controller="Order" asp-action="OrderAddEdit" asp-route-OrderId="@order["OrderID"]" class="btn btn-success me-3"><i class="bi bi-pencil-fill"></i></a>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <form asp-asp-controller="Order" asp-action="OrderDelete" method="post">
+                                            <input type="hidden" name="OrderID" value="@Convert.ToInt32(order["OrderID"])" />
+                                            <button class="btn btn-danger" type="button" onclick="confirmDelete('/Order/OrderDelete?OrderID=@order["OrderID"]')"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                               
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <!-- End Default Table Example -->
+        </div>
+    </div>
+</main>

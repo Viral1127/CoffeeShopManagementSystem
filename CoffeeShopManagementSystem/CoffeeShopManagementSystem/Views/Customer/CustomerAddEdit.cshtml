@@ -1,0 +1,150 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CoffeeShopManagementSystem.Models.CustomerModel
+<div class="main" id="main">
+    <div class="container">
+        <section class="section">
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                        @if (@TempData["CustomerInsert"] != null)
+                        {
+                            <div id="productInsertAlert" class="alert alert-success mt-3 alert-dismissible fade show" role="alert">
+                                <h5 class="text-success text-center ">@TempData["CustomerInsert"]</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+
+                            </div>
+                        }
+                        <div class="card-body">
+                            <h5 class="card-title">Customer</h5>
+
+                            <!-- General Form Elements -->
+                            <form asp-controller="Customer" asp-action="CustomerSave">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label asp-for="CustomerName" class="col-sm-4 col-form-label">Customer Name</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" asp-for="CustomerName" class="form-control">
+                                            <span asp-validation-for="CustomerName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="Email" class="col-sm-2 col-form-label">Email </label>
+                                        <div class="col-sm-10">
+                                            <input type="email" asp-for="Email" class="form-control">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label asp-for="HomeAddress" class="col-sm-4 col-form-label">Home Address</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" asp-for="HomeAddress" style="height: 100px"></textarea>
+                                            <span asp-validation-for="HomeAddress" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="MobileNo" class="col-sm-4 col-form-label">Mobile Number </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" asp-for="MobileNo" class="form-control">
+                                            <span asp-validation-for="MobileNo" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label asp-for="GSTNo" class="col-sm-4 col-form-label">GST Number</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" asp-for="GSTNo" class="form-control">
+                                            <span asp-validation-for="GSTNo" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="CityName" class="col-sm-4 col-form-label">City Name </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" asp-for="CityName" class="form-control">
+                                            <span asp-validation-for="CityName" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label asp-for="PinCode" class="col-sm-4 col-form-label">Pin Code </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" asp-for="PinCode" class="form-control">
+                                            <span asp-validation-for="PinCode" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <label asp-for="NetAmount" class="col-sm-4 col-form-label">Net Amount </label>
+                                        <div class="col-sm-10">
+                                            <input type="number" asp-for="NetAmount" class="form-control">
+                                            <span asp-validation-for="NetAmount" class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-6"> 
+                                        <label class="col-sm-2 col-form-label" asp-for="UserID">User Id</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-select" asp-for="UserID" asp-items="@(new SelectList (ViewBag.UserList , "id" , "value"))">
+                                                <option selected>Select User</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="row mt-5">
+                                    <div class="col-12 text-center">
+                                        <a asp-controller="Customer" asp-action="CustomerSave">
+                                            <input type="hidden" name="CustomerID" value="@Model.CustomerID" />
+
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                        </a>
+
+                                        <button type="reset" class="btn btn-secondary">Reset</button>
+
+                                        <a asp-controller="Customer" asp-action="CustomerList">
+                                            <button type="button" class="btn btn-success">Back</button>
+
+                                        </a>
+
+                                    </div>
+                                </div>
+
+                            </form><!-- End General Form Elements -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

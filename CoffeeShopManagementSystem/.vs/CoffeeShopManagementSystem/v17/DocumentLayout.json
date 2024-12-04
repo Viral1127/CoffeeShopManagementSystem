@@ -1,0 +1,61 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Darshan University\\sem-5\\Prectical\\Asp.Net\\CoffeeShopManagementSystem\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EDF1A8DE-182C-434D-AEA3-147EECF9C43B}|CoffeeShopManagementSystem\\CoffeeShopManagementSystem.csproj|d:\\darshan university\\sem-5\\prectical\\asp.net\\coffeeshopmanagementsystem\\coffeeshopmanagementsystem\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EDF1A8DE-182C-434D-AEA3-147EECF9C43B}|CoffeeShopManagementSystem\\CoffeeShopManagementSystem.csproj|solutionrelative:coffeeshopmanagementsystem\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EDF1A8DE-182C-434D-AEA3-147EECF9C43B}|CoffeeShopManagementSystem\\CoffeeShopManagementSystem.csproj|d:\\darshan university\\sem-5\\prectical\\asp.net\\coffeeshopmanagementsystem\\coffeeshopmanagementsystem\\views\\user\\userlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EDF1A8DE-182C-434D-AEA3-147EECF9C43B}|CoffeeShopManagementSystem\\CoffeeShopManagementSystem.csproj|solutionrelative:coffeeshopmanagementsystem\\views\\user\\userlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 285,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserList.cshtml",
+              "DocumentMoniker": "D:\\Darshan University\\sem-5\\Prectical\\Asp.Net\\CoffeeShopManagementSystem\\CoffeeShopManagementSystem\\Views\\User\\UserList.cshtml",
+              "RelativeDocumentMoniker": "CoffeeShopManagementSystem\\Views\\User\\UserList.cshtml",
+              "ToolTip": "D:\\Darshan University\\sem-5\\Prectical\\Asp.Net\\CoffeeShopManagementSystem\\CoffeeShopManagementSystem\\Views\\User\\UserList.cshtml",
+              "RelativeToolTip": "CoffeeShopManagementSystem\\Views\\User\\UserList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-04T13:45:30.724Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\Darshan University\\sem-5\\Prectical\\Asp.Net\\CoffeeShopManagementSystem\\CoffeeShopManagementSystem\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "CoffeeShopManagementSystem\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\Darshan University\\sem-5\\Prectical\\Asp.Net\\CoffeeShopManagementSystem\\CoffeeShopManagementSystem\\Controllers\\UserController.cs",
+              "RelativeToolTip": "CoffeeShopManagementSystem\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T13:42:09.295Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
