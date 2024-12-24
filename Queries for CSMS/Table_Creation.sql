@@ -6,7 +6,7 @@ GO
 USE CSMS;
 GO
 
-
+---------------------
 
 -- Create Tables
 
